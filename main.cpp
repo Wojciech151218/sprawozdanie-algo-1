@@ -78,7 +78,7 @@ void dontDisplay(int p,int q, std::vector<int> A){
 
 int main() {
     srand(time(NULL));
-    int n = 100000;
+    int n = 10000;
     std::vector<int> A(n);
     for(int i = 0;i!=n;i++){
         A[i] = std::rand()%1000;
