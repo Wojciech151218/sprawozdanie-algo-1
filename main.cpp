@@ -53,7 +53,15 @@ void heapSort(std::vector<int>* A, void (*display)(int, int, const std::vector<i
 }
 void shellSort(std::vector<int>* A, void (*display)(int, int, const std::vector<int>)){
     int length = A->size();
-    int gap = length / 2;
+    std::vector<int> sedgewickIncrements = {1, 5, 19, 41, 109, 209, 505, 929, 2161, 3905,
+                                            8929, 16001, 36289, 64769, 146305, 260609, 587521,
+                                            1045505, 2354689, 4188161, 9427969};
+    int sedgewickIndex = 0;
+    while (sedgewickIncrements[sedgewickIndex] < A->size() / 3) {
+        sedgewickIndex++;
+    }
+
+    int gap = sedgewickIncrements[sedgewickIndex];
     while (gap > 0) {
         for( int i  = gap ;i != length  ; i++){
             int temp = (*A)[i];
@@ -78,7 +86,7 @@ void dontDisplay(int p,int q, std::vector<int> A){
 
 int main() {
     srand(time(NULL));
-    int n = 10000;
+    int n = 20;
     std::vector<int> A(n);
     for(int i = 0;i!=n;i++){
         A[i] = std::rand()%1000;
@@ -86,8 +94,8 @@ int main() {
     display(-1,-1,A);
     //heapSort(&A,display);
     //heapSort(&A,dontDisplay);// algorytm bez kosztów wyświetlania
-    //shellSort(&A,display);
-    shellSort(&A,dontDisplay);
-    display(-1,-1,A);
+    shellSort(&A,display);
+    //shellSort(&A,dontDisplay);
+    //display(-1,-1,A);
     return 0;
 }
